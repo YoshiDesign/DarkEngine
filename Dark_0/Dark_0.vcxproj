@@ -49,7 +49,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\;vendor\;src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -80,7 +80,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DarkGL.cpp" />
+    <ClCompile Include="src\RenderSystem\RenderSystem.cpp" />
+    <ClCompile Include="src\RenderSystem\Shaders\Shader.cpp" />
+    <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DarkGL.h" />
+    <ClInclude Include="src\RenderSystem\RenderSystem.h" />
+    <ClInclude Include="src\RenderSystem\Shaders\Shader.h" />
+    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="vendor\dark_core.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
