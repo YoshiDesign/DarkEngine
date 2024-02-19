@@ -51,4 +51,12 @@ namespace dark {
         return 0;
 
     }
+
+    void DarkGL::updateCamera(float frameTime, AppObject& viewerObject, Camera& camera)
+    {
+        cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewerObject);
+        camera.setViewYXZ(viewerObject.transform.translation + glm::vec3(0.f, 0.f, 0.f), viewerObject.transform.rotation + glm::vec3());
+        camera.setPerspectiveProjection(glm::radians(50.f), aspect, 2.0f, 500.f);
+    }
+
 }

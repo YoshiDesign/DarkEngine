@@ -81,6 +81,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DarkGL.cpp" />
+    <ClCompile Include="src\GameSystem\Creative\AppObject.cpp" />
+    <ClCompile Include="src\GameSystem\Periph\KeyboardController.cpp" />
+    <ClCompile Include="src\GameSystem\Creative\Model3D.cpp" />
+    <ClCompile Include="src\RenderSystem\Camera\Camera.cpp" />
+    <ClCompile Include="src\RenderSystem\Data\IndexBuffer.cpp" />
+    <ClCompile Include="src\RenderSystem\Data\UBO.cpp" />
+    <ClCompile Include="src\RenderSystem\Data\VertexArray.cpp" />
+    <ClCompile Include="src\RenderSystem\Data\VertexBuffer.cpp" />
+    <ClCompile Include="src\RenderSystem\GUI\MainGui.cpp" />
     <ClCompile Include="src\RenderSystem\RenderSystem.cpp" />
     <ClCompile Include="src\RenderSystem\Shaders\Shader.cpp" />
     <ClCompile Include="src\Window.cpp" />
@@ -88,6 +97,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DarkGL.h" />
+    <ClInclude Include="src\GameSystem\Creative\AppComponent.h" />
+    <ClInclude Include="src\GameSystem\Creative\AppObject.h" />
+    <ClInclude Include="src\GameSystem\DebugData.h" />
+    <ClInclude Include="src\GameSystem\Periph\KeyboardController.h" />
+    <ClInclude Include="src\GameSystem\Creative\Model3D.h" />
+    <ClInclude Include="src\RenderSystem\Camera\Camera.h" />
+    <ClInclude Include="src\RenderSystem\Data\IndexBuffer.h" />
+    <ClInclude Include="src\RenderSystem\Data\UBO.h" />
+    <ClInclude Include="src\RenderSystem\Data\VertexArray.h" />
+    <ClInclude Include="src\RenderSystem\Data\VertexBuffer.h" />
+    <ClInclude Include="src\RenderSystem\Data\VertexBufferLayout.h" />
+    <ClInclude Include="src\RenderSystem\GUI\MainGui.h" />
     <ClInclude Include="src\RenderSystem\RenderSystem.h" />
     <ClInclude Include="src\RenderSystem\Shaders\Shader.h" />
     <ClInclude Include="src\Window.h" />

@@ -1,4 +1,5 @@
-#include "RenderSystem.h"
+#include <RenderSystem/RenderSystem.h>
+#include <RenderSystem/Camera/Camera.h>
 #include <iostream>
 
 namespace dark {
