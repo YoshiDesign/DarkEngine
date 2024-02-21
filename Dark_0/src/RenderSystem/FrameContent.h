@@ -1,12 +1,13 @@
 #pragma once
-#include "Camera.h"
-#include "GameSystem/AppObject.h"
-#include "UBO.h"
+#include <RenderSystem/Camera/Camera.h>
+#include <GameSystem/Creative/AppObject.h>
 #include <vector>
 
-struct FrameContent {
-	Camera& camera;
-	AppObject::Map& appObjects;
-	UBO& ubo;
-};
+namespace dark {
 
+	struct FrameContent {
+		Camera& camera;
+		AppObject::Map& appObjects;
+	};
+
+}

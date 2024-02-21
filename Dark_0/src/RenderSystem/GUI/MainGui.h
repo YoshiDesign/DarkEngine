@@ -6,25 +6,29 @@
 
 #include <Tests/TestClearColor.h>
 #include <Tests/TestTexture2D.h>
-#include <Gamesystem/DebugData.h>>
+#include <Gamesystem/DebugData.h>
 
-class MainGui {
+namespace dark {
 
-public:
-	MainGui();
-	~MainGui();
+	class MainGui {
 
-	void InitImGui(GLFWwindow* window);
-	void Gui_NewFrame();
-	void Gui_Present();
-	void Gui_Render();
-	void Gui_RegisterTests();
+	public:
+		MainGui();
+		~MainGui();
 
-	std::unordered_map<const char*, float> debug_data;
-private:
-	float f;
-	int counter;
+		void InitImGui(GLFWwindow* window);
+		void Gui_NewFrame();
+		void Gui_Present();
+		void Gui_Render();
+		void Gui_RegisterTests();
 
-	test::Test* currentTest = nullptr;
-	test::TestMenu* testMenu = new test::TestMenu(currentTest);
-};
+		std::unordered_map<const char*, float> debug_data;
+	private:
+		float f;
+		int counter;
+
+		test::Test* currentTest = nullptr;
+		test::TestMenu* testMenu = new test::TestMenu(currentTest);
+	};
+
+}

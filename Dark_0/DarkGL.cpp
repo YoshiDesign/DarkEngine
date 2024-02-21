@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 
+
 // Darknews
 namespace dark {
     DarkGL::~DarkGL()
@@ -15,7 +16,7 @@ namespace dark {
     void DarkGL::Setup()
     {
 
-        window.InitWindow(WIDTH, HEIGHT, "Darkness");
+        window.InitWindow(WIDTH, HEIGHT, "Dark_0");
         if (!glewInit() == GLEW_OK) {
         	throw std::runtime_error("Glew is not ok!");
         }
@@ -26,18 +27,37 @@ namespace dark {
 
     void DarkGL::display(Window& window, double currentTime)
     {
-        renderer.Clear();
-        renderer.Draw();
+
     }
 
     int DarkGL::run()
     {
-        // Compile, bind and select shaders.
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 10; j++) {
+
+                auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
+                obj.model = Model3D::createModelFromFile("resource/3D/Enemy_1.obj");
+                obj.transform.translation.z = -15.0f;
+                obj.transform.translation.x = -15.0f * j;
+                obj.transform.translation.y = 15.0f * i;
+                //obj.transform.scale = { i + j, i + j, i + j };
+                appObjects.emplace(obj.getId(), std::move(obj));
+
+            }
+        }
+
         renderer.ShaderInit();
+        renderer.BufferInit();
+        renderer.CreateNamedUniformBlock();
+
+        FrameContent frameContent { camera, appObjects };
 
         while (!window.shouldClose())
         {
-            display(window, glfwGetTime());
+            updateCamera(glfwGetTime(), viewerObject, camera);
+            renderer.Clear();
+            renderer.Draw(frameContent);
             // Swap front and back buffers
             glfwSwapBuffers(window.getGLFWwindow());
 

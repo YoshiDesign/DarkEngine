@@ -34,10 +34,42 @@ namespace dark {
 		
 	}
 
-	void RenderSystem::Draw() 
+	void RenderSystem::CreateNamedUniformBlock()
 	{
+		ubo.CreateNamedUniformBlock("Transforms", shaderSystem.GetID("BlueShader"), 3);
+	}
+
+	void RenderSystem::BufferInit()
+	{
+
+		// Gen VA
+		VertexArray va;
+		// Gen VB
+		VertexBuffer vb;
+		// Gen IB
+		IndexBuffer ib;
+
+		// Construct vertex shader attributes
+		VertexBufferLayout layout;
+		layout.PushVertex(sizeof(Model3D::Vertex));
+
+		// Bind and add VA -- Create our vertex attribute locations
+		va.AddBuffer(ib, vb, layout);
+	}
+
+	void RenderSystem::Draw(FrameContent& frameContent)
+	{
+		// Probably doesn't need to go into the loop
 		shaderSystem.Bind("Shader_Zero");
-		GLCall(glDrawArrays(GL_POINTS, 0, 1));
+
+		for (auto& obj : frameContent.appObjects) {
+			// Write model vertex data to the vertex buffer
+			vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices());
+			ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
+			GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+		}
+
+		// GLCall(glDrawArrays(GL_POINTS, 0, 1));
 	}
 
 }

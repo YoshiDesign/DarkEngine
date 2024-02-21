@@ -5,37 +5,41 @@
 #include <memory>
 #include <unordered_map>
 
-class AppObject
-{
+namespace dark {
 
-public:
-	using id_t = unsigned int;
-	using Map = std::unordered_map<id_t, AppObject>;
-
-	static AppObject createAppObject(/*int texture_id*/)
+	class AppObject
 	{
-		static id_t currentId = 0;
-		return AppObject{ currentId++ /*, texture_id*/ };
-	}
 
-	AppObject(id_t objId /*, int texture_id */) : id{objId}, texture_id{texture_id} {}
+	public:
+		using id_t = unsigned int;
+		using Map = std::unordered_map<id_t, AppObject>;
 
-	AppObject(AppObject&&) = default;
-	AppObject(const AppObject&) = delete;
-	AppObject& operator=(const AppObject&) = delete;
-	AppObject& operator=(AppObject&&) = default;
+		static AppObject createAppObject(/*int texture_id*/)
+		{
+			static id_t currentId = 0;
+			return AppObject{ currentId++ /*, texture_id*/ };
+		}
 
-	inline const id_t getId() { return id; }
-	inline int get_texture() { return texture_id; }
-	inline void set_texture(int texture) { texture_id = texture; }
+		AppObject(id_t objId /*, int texture_id */) : id{ objId }, texture_id{ texture_id } {}
 
-	TransformComponent transform{};
-	glm::vec3 color{};
-	std::unique_ptr<Model3D> model{};
+		AppObject(AppObject&&) = default;
+		AppObject(const AppObject&) = delete;
+		AppObject& operator=(const AppObject&) = delete;
+		AppObject& operator=(AppObject&&) = default;
 
-private:
+		inline const id_t getId() { return id; }
+		inline int get_texture() { return texture_id; }
+		inline void set_texture(int texture) { texture_id = texture; }
 
-	int texture_id;
-	id_t id;
+		TransformComponent transform{};
+		glm::vec3 color{};
+		std::unique_ptr<Model3D> model{};
 
-};
+	private:
+
+		int texture_id;
+		id_t id;
+
+	};
+
+}

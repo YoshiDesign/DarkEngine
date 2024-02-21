@@ -1,10 +1,13 @@
 #pragma once
-#include "Window.h"
+#include <Window.h>
 #include <RenderSystem/RenderSystem.h>
-#include <GameSystem/Creative/AppObject.h>
-#include <GameSystem/Periph/KeyboardController.h>
 #include <RenderSystem/Camera/Camera.h>
 #include <RenderSystem/GUI/MainGui.h>
+#include <RenderSystem/FrameContent.h>
+#include <GameSystem/Creative/AppObject.h>
+#include <GameSystem/Periph/KeyboardController.h>
+#include <GameSystem/Creative/Model3D.h>
+#include <GameSystem/Creative/AppObject.h>
 
 namespace dark {
 	class DarkGL {

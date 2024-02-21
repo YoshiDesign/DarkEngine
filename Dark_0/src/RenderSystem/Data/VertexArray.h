@@ -3,21 +3,23 @@
 #include "IndexBuffer.h"
 #include "VertexBufferLayout.h"
 
-//class VertexBufferLayout;
+namespace dark {
 
-class VertexArray {
+	class VertexArray {
 
-public:
+	public:
 
-	VertexArray();
-	~VertexArray();
+		VertexArray();
+		~VertexArray();
 
-	void AddBuffer(IndexBuffer& ib, VertexBuffer& vb, const VertexBufferLayout& layout);
-	void Bind() const;
-	void Unbind() const;
+		void AddBuffer(IndexBuffer& ib, VertexBuffer& vb, const VertexBufferLayout& layout);
+		void Bind();
+		void Unbind();
 
-private:
+	private:
 
-	unsigned int m_RendererID;
+		GLuint m_RendererID;
 
-};
+	};
+
+}

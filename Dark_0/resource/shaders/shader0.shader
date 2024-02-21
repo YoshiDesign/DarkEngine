@@ -1,20 +1,34 @@
 #shader vertex
-#version 430
-layout(location = 0) in vec3 position;
-uniform mat4 mv_matrix;
-uniform mat4 proj_matrix;
+#version 450
 
-void main(void)
-{
-	gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-};
+layout(location = 0) in vec3 position;
+layout(location = 1) in vec3 v_fragColor;
+layout(location = 2) in vec3 normal;
+// layout(location = 3) in vec2 uv;
+
+layout(std140, shared, binding = 0) uniform Transforms{
+	mat4 viewMatrix;
+	mat4 projectionMatrix;
+	mat4 modelMatrix;
+} T;
+
+layout(location = 0) out vec4 fragColor;
+
+void main() {
+	vec4 positionWorld = T.modelMatrix * vec4(position, 1.0);	// Translate this vertex from model space to world space
+	gl_Position = T.projectionMatrix * T.viewMatrix * positionWorld;
+	fragColor = vec4(position, 1.0);
+}
+
+
 
 
 #shader fragment
-#version 430
-out vec4 color;
+#version 450
+layout(location = 0) in vec4 fragColor;
+layout(location = 0) out vec4 outColor;
+// uniform sampler2D texture_atlas;
 
-void main(void)
-{
-	color = vec4(0.0, 0.0, 1.0, 1.0); 
-};
+void main() {
+	outColor = fragColor;
+}
