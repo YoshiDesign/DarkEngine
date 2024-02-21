@@ -39,9 +39,8 @@ namespace dark {
 		 */
 		const auto& elements = layout.getElements();
 
-		// TODO - Set these up in the VertexBufferLayout factory
+		// TODO - This is a hard-coded setup
 		size_t offsets[3] = { offsetof(Model3D::Vertex, position), offsetof(Model3D::Vertex, color), offsetof(Model3D::Vertex, normal) };
-
 		if (elements.size() != 3) {
 			throw std::runtime_error("Number of offsets do not match the vertex shader's attribute count.");
 		}
@@ -56,8 +55,6 @@ namespace dark {
 			*/
 			glVertexArrayAttribFormat(m_RendererID, i, element.count, element.type, element.normalized, offsets[i]);
 			glVertexArrayAttribBinding(m_RendererID, i, 0);
-
-			// Enabling the vertex attribute
 			glEnableVertexArrayAttrib(m_RendererID, i);
 
 		}

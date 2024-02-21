@@ -7,9 +7,10 @@
 namespace dark {
 	// Specifies the Vertex Buffer Layout's attributes
 	struct VertexBufferElement {
-		unsigned int type;
-		unsigned int count;
-		unsigned char normalized;
+		unsigned int	type;
+		unsigned int	count;
+		unsigned char	normalized;
+		unsigned int	offset;
 
 		// These are the supported types of our VertexArray.
 		// They will determine the byte offsets of our data

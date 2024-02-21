@@ -68,7 +68,18 @@ namespace dark {
 
 	void RenderSystem::Draw(FrameContent& frameContent)
 	{
-
+		/**
+		* TODOs - If ubo.getBlockSize() ever changes we need to call UBO::Allocate() again
+		*		- Optimization: Currently using 3 mat4's in our uniform block while
+		*		  2 of its elements are updated per frame and 1 is updated per object; however
+		*		  I'm overwriting the entire uniform block for every object. Relieving the 
+		*		  uniform block of the model matrix would remove glMap/unmap from the appObject loop.
+		*		  Removing each object's model matrix to a different uniform could be helpful.
+		*		- Optimization: vb.UpdateData and ib.UpdateData both use glBufferData which
+		*		  reallocates the entire buffer before writing updates which can be inefficient.
+		*		- Certain assertions could be helpful, such as assuring OpenGL that all of the 
+		*		  data being copied into the uniform block is the correct size.
+		*/
 		
 		*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[0])) = frameContent.camera.getView();
 		*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[1])) = frameContent.camera.getProjection();
@@ -77,7 +88,10 @@ namespace dark {
 
 			void* ptr = glMapNamedBuffer(ubo.getID(), GL_WRITE_ONLY | GL_MAP_INVALIDATE_BUFFER_BIT);
 
+			// Point to the model matrix of our uniform block
 			*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[2])) = obj.second.transform._mat4();
+
+			// Write the new uniform block values
 			memcpy(ptr, ubo.getBuffer(), ubo.getBlockSize());
 
 			glUnmapNamedBuffer(ubo.getID());
@@ -89,7 +103,7 @@ namespace dark {
 			ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
 
 			// getNummVertices is the number of unique vertices
-			GLCall(glDrawElements(GL_TRIANGLES, obj.second.model->getNumVertices(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
+			GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 		}
 
 		//GLCall(glDrawArrays(GL_POINTS, 0, 1));
