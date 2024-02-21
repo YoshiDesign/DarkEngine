@@ -22,9 +22,12 @@ namespace dark {
 	public:
 		void Clear() const;
 		void Draw(FrameContent& frameContent);
+		void Generate();
 		void BufferInit();
+		void UBOInit();
 		void ShaderInit();
 		void CreateNamedUniformBlock();
+		UBO& getUBO() { return ubo; }
 		// void Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, ShaderSystem& shaderSystem, FrameContent& frame_content) const;
 	private:
 		Shader shaderSystem;

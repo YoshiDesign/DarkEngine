@@ -48,16 +48,17 @@ namespace dark {
         }
 
         renderer.ShaderInit();
-        renderer.BufferInit();
-        renderer.CreateNamedUniformBlock();
+        renderer.Generate();
 
         FrameContent frameContent { camera, appObjects };
 
         while (!window.shouldClose())
         {
+
             updateCamera(glfwGetTime(), viewerObject, camera);
             renderer.Clear();
             renderer.Draw(frameContent);
+
             // Swap front and back buffers
             glfwSwapBuffers(window.getGLFWwindow());
 

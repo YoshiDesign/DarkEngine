@@ -21,6 +21,19 @@ namespace dark {
 
 	}
 
+	void RenderSystem::Generate()
+	{
+
+		BufferInit();
+
+		ubo.Create();
+		ubo.CreateNamedUniformBlock("Transforms", shaderSystem.GetID("Shader_Zero"), 3);
+		ubo.Bind();
+		ubo.Allocate();
+
+		shaderSystem.Bind("Shader_Zero");
+	}
+
 	void RenderSystem::Clear() const
 	{
 		GLCall(glClearColor(0.0f, 1.0f, 0.0f, 1.0));
@@ -29,25 +42,21 @@ namespace dark {
 
 	void RenderSystem::ShaderInit()
 	{
-		shaderSystem.AddShader("resource/shaders/shader0.shader", "Shader_Zero");
+		shaderSystem.AddShader("resource/shaders/shader1.shader", "Shader_Zero");
 		//shaderSystem.AddShader("resource/shaders/01_Simple_3D.shader", "GreenShader");
 		
-	}
-
-	void RenderSystem::CreateNamedUniformBlock()
-	{
-		ubo.CreateNamedUniformBlock("Transforms", shaderSystem.GetID("BlueShader"), 3);
 	}
 
 	void RenderSystem::BufferInit()
 	{
 
-		// Gen VA
-		VertexArray va;
-		// Gen VB
-		VertexBuffer vb;
-		// Gen IB
-		IndexBuffer ib;
+		// Create/Bind the holy trinity via DSA functions
+		va.Create();
+		ib.Create();
+		vb.Create();
+		va.Bind();
+		vb.Bind();
+		ib.Bind();
 
 		// Construct vertex shader attributes
 		VertexBufferLayout layout;
@@ -59,17 +68,31 @@ namespace dark {
 
 	void RenderSystem::Draw(FrameContent& frameContent)
 	{
-		// Probably doesn't need to go into the loop
-		shaderSystem.Bind("Shader_Zero");
+
+		
+		*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[0])) = frameContent.camera.getView();
+		*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[1])) = frameContent.camera.getProjection();
 
 		for (auto& obj : frameContent.appObjects) {
+
+			void* ptr = glMapNamedBuffer(ubo.getID(), GL_WRITE_ONLY | GL_MAP_INVALIDATE_BUFFER_BIT);
+
+			*((glm::mat4*)(ubo.getBuffer() + ubo.offsets[2])) = obj.second.transform._mat4();
+			memcpy(ptr, ubo.getBuffer(), ubo.getBlockSize());
+
+			glUnmapNamedBuffer(ubo.getID());
+
+			glBindBufferBase(GL_UNIFORM_BUFFER, 0, ubo.getID());
+
 			// Write model vertex data to the vertex buffer
 			vb.UpdateData(obj.second.model->getVerticesv(), obj.second.model->getNumVertices());
 			ib.UpdateData(obj.second.model->getIndicesv(), obj.second.model->getNumIndices());
-			GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+
+			// getNummVertices is the number of unique vertices
+			GLCall(glDrawElements(GL_TRIANGLES, obj.second.model->getNumVertices(), GL_UNSIGNED_INT, nullptr));  // nullptr because the index buffer is already bound
 		}
 
-		// GLCall(glDrawArrays(GL_POINTS, 0, 1));
+		//GLCall(glDrawArrays(GL_POINTS, 0, 1));
 	}
 
 }

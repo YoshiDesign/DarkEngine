@@ -7,12 +7,13 @@ namespace dark {
 
 		IndexBuffer();
 		~IndexBuffer();
-
-		void Bind() const;
+		void Generate();
+		void Bind();
+		void Create();
 		void Unbind() const;
-
 		void UpdateData(const unsigned int* data, unsigned int count);
 		inline unsigned int GetCount() const { return m_count; }
+		GLuint getBufferTarget() { return m_RendererID; }
 
 	private:
 		GLuint m_RendererID;

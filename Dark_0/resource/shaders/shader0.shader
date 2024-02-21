@@ -6,17 +6,11 @@ layout(location = 1) in vec3 v_fragColor;
 layout(location = 2) in vec3 normal;
 // layout(location = 3) in vec2 uv;
 
-layout(std140, shared, binding = 0) uniform Transforms{
-	mat4 viewMatrix;
-	mat4 projectionMatrix;
-	mat4 modelMatrix;
-} T;
-
 layout(location = 0) out vec4 fragColor;
 
 void main() {
-	vec4 positionWorld = T.modelMatrix * vec4(position, 1.0);	// Translate this vertex from model space to world space
-	gl_Position = T.projectionMatrix * T.viewMatrix * positionWorld;
+	
+	gl_Position = vec4(position, 1.0);
 	fragColor = vec4(position, 1.0);
 }
 

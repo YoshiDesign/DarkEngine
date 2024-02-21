@@ -10,7 +10,10 @@ namespace dark {
 
 		void CreateNamedUniformBlock(const char* blockName, unsigned int program, unsigned int num);
 		void FreeUniformBlockBuffer(); // Only use where swapping/destroying buffers during lifespan of the derived class, the destructor does the same thing
+		void Generate();
+		void Create();
 		void Bind();
+		void Allocate();
 		void Unbind();
 
 		inline unsigned char* getBuffer() { return blockBuffer; }

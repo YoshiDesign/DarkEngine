@@ -115,8 +115,6 @@ namespace dark {
 			}
 		}
 
-		//std::cout << "Vertices: " << vertices.size() << std::endl;
-		//std::cout << "Indices: " << indices.size() << std::endl;
 	}
 
 }

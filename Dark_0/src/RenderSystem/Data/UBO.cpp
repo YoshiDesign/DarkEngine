@@ -5,6 +5,7 @@
 namespace dark {
     UBO::UBO()
     {
+        std::cout << "Created UBO" << std::endl;
         // glCreateBuffers(1, &m_uboId);
     }
 
@@ -15,9 +16,24 @@ namespace dark {
         }
     }
 
+    void UBO::Generate()
+    {
+        glGenBuffers(1, &m_uboId);
+    }
+    
+    void UBO::Create()
+    {
+        glCreateBuffers(1, &m_uboId);
+    }
+
     void UBO::Bind()
     {
         glBindBuffer(GL_UNIFORM_BUFFER, m_uboId);
+    }
+
+    void UBO::Allocate()
+    {
+        glNamedBufferData(m_uboId, getBlockSize(), NULL, GL_DYNAMIC_DRAW);
     }
 
     /*
@@ -26,7 +42,7 @@ namespace dark {
      */
     void UBO::CreateNamedUniformBlock(const char* blockName, unsigned int program, unsigned int num)
     {
-        // This uniform block already has memory. Don
+        // This uniform block already has memory.
         if (blockBuffer) {
             free(blockBuffer);
             throw std::runtime_error("[Error] UBO::CreateUniformBlock - A buffer with this name is already allocated.");
