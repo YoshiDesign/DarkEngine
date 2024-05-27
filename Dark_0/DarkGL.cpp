@@ -37,7 +37,7 @@ namespace dark {
             for (int j = 0; j < 10; j++) {
 
                 auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-                obj.model = Model3D::createModelFromFile("resource/3D/Enemy_1.obj");
+                obj.model = Model3D::createModelFromFile("resource/3D/walls.obj");
                 obj.transform.translation.z = -15.0f;
                 obj.transform.translation.x = -15.0f * j;
                 obj.transform.translation.y = 15.0f * i;
