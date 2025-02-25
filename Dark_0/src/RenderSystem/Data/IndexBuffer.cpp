@@ -25,7 +25,7 @@ namespace dark {
         //td::cout << "[IndexBuffer - UpdateData] Count\t" << count << std::endl;
         // This could cause incompat on certains platforms if !true
         // ASSERT(sizeof unsigned int == sizeof GLuint)
-        std::cout << "Num indices: " << count << std::endl;
+        //std::cout << "Num indices: " << count << std::endl;
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), data, GL_STATIC_DRAW);
         //glNamedBufferData(getBufferTarget(), count * sizeof(unsigned int), data, GL_STATIC_DRAW);
         //glNamedBufferStorage(getBufferTarget(), count * sizeof(unsigned int), data, GL_MAP_WRITE_BIT);

@@ -24,8 +24,8 @@ namespace dark {
         void moveInPlaneXZ(GLFWwindow* window, float dt, AppObject& appObject);
 
         KeyMappings keys{};
-        float moveSpeed{ 13.f };
-        float lookSpeed{ 1.5f };
+        float moveSpeed{ 0.01f };
+        float lookSpeed{ 0.004f };
 
     };
 
