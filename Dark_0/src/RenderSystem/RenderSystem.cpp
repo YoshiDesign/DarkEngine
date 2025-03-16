@@ -36,7 +36,7 @@ namespace dark {
 
 	void RenderSystem::Clear() const
 	{
-		GLCall(glClearColor(0.2f, 0.2f, 0.0f, 0.2));
+		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 	}
 

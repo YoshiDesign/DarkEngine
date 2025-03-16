@@ -70,7 +70,7 @@ namespace dark {
 			std::cout << "Pushing Vertex descriptor" << std::endl;
 			std::cout << "Size: " << size << std::endl;
 			std::cout << "GL_FLOAT:\t" << GL_FLOAT << "\nGL_FALSE:\t" << GL_FALSE << std::endl;
-			// This needs to match our Vertex objects members
+			// This needs to match our Vertex objects members:
 			// glm::vec3 position{};	
 			// glm::vec3 color{};		
 			// glm::vec3 normal{};		

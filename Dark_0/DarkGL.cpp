@@ -33,17 +33,21 @@ namespace dark {
     int DarkGL::run()
     {
 
+        auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
+        ship.model = Model3D::createModelFromFile("resource/3D/ship.obj"); 
+        appObjects.emplace(ship.getId(), std::move(ship));
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
 
-                auto obj = AppObject::createAppObject(/*TODO Implement textures*/);
-                obj.model = Model3D::createModelFromFile("resource/3D/walls.obj");
-                obj.transform.translation.z = -15.0f;
-                obj.transform.translation.x = -15.0f * j;
-                obj.transform.translation.y = 15.0f * i;
+                auto tri = AppObject::createAppObject(/*TODO Implement textures*/);
+                tri.model = Model3D::createModelFromFile("resource/3D/triangle.obj");
+                tri.transform.translation.z = -2.0f * i;
+                tri.transform.translation.x = -2.0f * j;
+                //obj.transform.translation.y = 15.0f * i;
                 //obj.transform.scale = { i + j, i + j, i + j };
-                appObjects.emplace(obj.getId(), std::move(obj));
-
+                appObjects.emplace(tri.getId(), std::move(tri));
+                
             }
         }
 
