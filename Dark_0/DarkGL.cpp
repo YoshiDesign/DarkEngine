@@ -20,9 +20,16 @@ namespace dark {
         if (!glewInit() == GLEW_OK) {
         	throw std::runtime_error("Glew is not ok!");
         }
-
+        glfwSetWindowSizeCallback(window.getGLFWwindow(), window_reshape_callback);
         std::cout << glGetString(GL_VERSION) << std::endl;
 
+    }
+
+    void DarkGL::window_reshape_callback(GLFWwindow* window, int newWidth, int newHeight)
+    {
+        std::cout << "Window Resized\n" << std::endl;
+        // aspect = (float)newWidth / (float)newHeight;
+        glViewport(0, 0, newWidth, newHeight);
     }
 
     void DarkGL::display(Window& window, double currentTime)
@@ -33,6 +40,10 @@ namespace dark {
     int DarkGL::run()
     {
 
+        auto terrain = AppObject::createAppObject(/*TODO Implement textures*/);
+        terrain.model = Model3D::createModelFromFile("resource/3D/LargeTerrain.obj");
+        appObjects.emplace(terrain.getId(), std::move(terrain));
+        
         auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
         ship.model = Model3D::createModelFromFile("resource/3D/ship.obj"); 
         appObjects.emplace(ship.getId(), std::move(ship));
@@ -58,6 +69,9 @@ namespace dark {
 
         while (!window.shouldClose())
         {
+            window.imgui.Gui_NewFrame();
+            window.imgui.Gui_Present();
+            window.imgui.Gui_Render();
 
             updateCamera(glfwGetTime(), viewerObject, camera);
             renderer.Clear();

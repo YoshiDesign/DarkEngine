@@ -41,7 +41,7 @@ namespace dark {
 		glfwSetWindowUserPointer(window_device, this);
 
 		// Whenever our window is resized
-		glfwSetFramebufferSizeCallback(window_device, framebufferResizedCallback);
+		//glfwSetFramebufferSizeCallback(window_device, framebufferResizedCallback);
 
 		glfwMakeContextCurrent(window_device);
 		glfwSwapInterval(1);
@@ -57,18 +57,21 @@ namespace dark {
 		glFrontFace(GL_CW);
 		glCullFace(GL_BACK);
 
+		imgui.InitImGui(window_device);
+
 		return 0;
 
 	}
 
 	bool Window::shouldClose() { return glfwWindowShouldClose(window_device); }
 
-	void Window::framebufferResizedCallback(GLFWwindow* window, int width, int height)
-	{
-		auto _window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-		_window->framebufferResized = true;
-		_window->width = width;
-		_window->height = height;
-	}
+	//void Window::framebufferResizedCallback(GLFWwindow* window, int width, int height)
+	//{
+	//	std::cout << "Window Resized\n" << std::endl;
+	//	auto _window = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+	//	_window->framebufferResized = true;
+	//	_window->width = width;
+	//	_window->height = height;
+	//}
 
 }

@@ -29,7 +29,10 @@ namespace dark {
 		void CreateNamedUniformBlock();
 		UBO& getUBO() { return ubo; }
 		// void Draw(VertexArray& va, VertexBuffer& vb, IndexBuffer& ib, ShaderSystem& shaderSystem, FrameContent& frame_content) const;
+
+
 	private:
+		
 		Shader shaderSystem;
 		VertexArray va;
 		VertexBuffer vb;

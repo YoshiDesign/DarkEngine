@@ -21,6 +21,8 @@ namespace dark {
 
 		const glm::vec4 getCameraView();
 
+		float aspect;
+
 	private:
 		glm::mat4 projectionMatrix{ 1.f };
 		glm::mat4 viewMatrix{ 1.f };

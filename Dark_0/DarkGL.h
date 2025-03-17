@@ -24,6 +24,8 @@ namespace dark {
 		int run();
 		void updateCamera(float frameTime);
 		void updateCamera(float frameTime, AppObject& viewerObject, Camera& camera);
+		void updateAspectRatio(float _aspect) { aspect = _aspect; }
+		static void window_reshape_callback(GLFWwindow* window, int newWidth, int newHeight);
 
 	private:
 		Window window;

@@ -9,19 +9,19 @@ namespace dark {
 
 		if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS)
 		{
-			rotate.y += 1.f;
+			rotate.y += 0.3f;
 		}
 		if (glfwGetKey(window, keys.lookLeft) == GLFW_PRESS)
 		{
-			rotate.y -= 1.f;
+			rotate.y -= 0.3f;
 		}
 		if (glfwGetKey(window, keys.lookUp) == GLFW_PRESS)
 		{
-			rotate.x -= 1.f;
+			rotate.x -= 0.3f;
 		}
 		if (glfwGetKey(window, keys.lookDown) == GLFW_PRESS)
 		{
-			rotate.x += 1.f;
+			rotate.x += 0.3f;
 		}
 
 		// This if statement effectively makes sure that rotate (matrix) is non-zero

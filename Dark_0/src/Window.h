@@ -1,6 +1,8 @@
 #pragma once
 #include "dark_core.h"
 #include <string>
+#include <RenderSystem/GUI/MainGui.h>
+#include <RenderSystem/Camera/Camera.h>
 
 namespace dark {
 
@@ -31,8 +33,10 @@ namespace dark {
 
 		GLFWwindow* getGLFWwindow() const { return window_device; }
 
+		MainGui imgui;
+
 	private:
-		static void framebufferResizedCallback(GLFWwindow* window, int width, int height);
+		//static void framebufferResizedCallback(GLFWwindow* window, int width, int height);
 
 
 	};
