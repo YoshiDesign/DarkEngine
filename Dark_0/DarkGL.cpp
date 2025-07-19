@@ -40,9 +40,9 @@ namespace dark {
     int DarkGL::run()
     {
 
-        auto terrain = AppObject::createAppObject(/*TODO Implement textures*/);
-        terrain.model = Model3D::createModelFromFile("resource/3D/LargeTerrain.obj");
-        appObjects.emplace(terrain.getId(), std::move(terrain));
+        //auto terrain = AppObject::createAppObject(/*TODO Implement textures*/);
+        //terrain.model = Model3D::createModelFromFile("resource/3D/LargeTerrain.obj");
+        //appObjects.emplace(terrain.getId(), std::move(terrain));
         
         auto ship = AppObject::createAppObject(/*TODO Implement textures*/);
         ship.model = Model3D::createModelFromFile("resource/3D/ship.obj"); 

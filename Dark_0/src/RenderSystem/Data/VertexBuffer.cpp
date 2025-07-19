@@ -11,6 +11,8 @@ namespace dark {
     {
         glDeleteBuffers(1, &m_RendererID);
     }
+
+    // LEGACY SUPPORT
     void VertexBuffer::Generate()
     {
         glGenBuffers(1, &m_RendererID);
@@ -24,8 +26,8 @@ namespace dark {
     void VertexBuffer::UpdateData(const void* data, unsigned int size)
     {
         //std::cout << "Num Vertices: " << size << std::endl;
-        glBufferData(GL_ARRAY_BUFFER, size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW);
-        // glNamedBufferData(getBufferTarget(), size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW);
+        // glBufferData(GL_ARRAY_BUFFER, size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW);
+        glNamedBufferData(m_RendererID, size * sizeof(Model3D::Vertex), data, GL_STATIC_DRAW);
         // glNamedBufferStorage(getBufferTarget(), size * sizeof(Model3D::Vertex), data, GL_DYNAMIC_STORAGE_BIT);
 
     }

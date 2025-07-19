@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DarkGL.h" />
+    <ClInclude Include="dark_pch.h" />
     <ClInclude Include="src\GameSystem\Creative\AppComponent.h" />
     <ClInclude Include="src\GameSystem\Creative\AppObject.h" />
     <ClInclude Include="src\GameSystem\DebugData.h" />
